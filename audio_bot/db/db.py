@@ -107,5 +107,3 @@ def get_users_with_pay_vlaue():
                 return data
             except (Exception, Error) as error:
                 print("Ошибка при добавлении значения в таблицу", error)
-
-print(get_users_with_pay_vlaue())

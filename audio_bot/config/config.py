@@ -21,4 +21,4 @@ pay_url = 'https://yoomoney.ru/quickpay/confirm.xml?' \
           'paymentType=SB&' \
           'sum=1111'
 
-# https://yoomoney.ru/quickpay/confirm.xml?receiver=4100117596986931&label=book244607176&quickpay-form=shop&targets=Аудио книга «Мама, я.. Кто я?»&paymentType=SB&sum=2
+'https://yoomoney.ru/quickpay/confirm.xml?receiver=4100117596986931&label=book244607176&quickpay-form=shop&targets=Аудио книга «Мама, я.. Кто я?»&paymentType=SB&sum=2'

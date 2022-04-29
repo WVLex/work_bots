@@ -1,23 +1,16 @@
-import asyncio
-
-import aiogram.utils.exceptions
 from aiogram import types, Dispatcher
-from aiogram.utils.deep_linking import decode_payload
 
-from audio_bot.create_bot import bot, dp
+from audio_bot.create_bot import bot
 from audio_bot.db import db
 from audio_bot.config import texts
 from audio_bot.keyboards import client_keyboards
 
 
 async def start(message: types.Message):
-    args = message.get_args()
-    payload = decode_payload(args)
-    await message.answer(f"Your payload: {payload}")
     if not db.check_user(message.from_user.id):
         db.append_user(message.from_user.id)
         await bot.send_audio(message.from_user.id,
-                             audio='CQACAgIAAxkBAAMMYmlZrumPOpn7wtJX0dUMSag72okAAmwYAAJcDUlLx85opvT5WP0kBA',
+                             audio='CQACAgIAAxkBAAPIYmvCLYrxhmmt3Fd85hgooaXmUhUAAkMfAAI9DmBL0lCk2i-zq3QkBA',
                              protect_content=True,
                              title='Часть 1')
         db.update_value(message.from_user.id, 'pay', True)

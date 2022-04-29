@@ -75,7 +75,7 @@ async def hello_world():
                 del bot
             else:
                 await audio_bot_dp.bot.send_audio(int(label[4:]),
-                                                  audio='CQACAgIAAxkBAAMUYmlcgT0iuduRb3yEsuSBz3k8wk0AAp0YAAJcDUlLzxbezBNQzqokBA',
+                                                  audio='CQACAgIAAxkBAAPKYmvCW80pMHT6c1AQ8nphPau0xBEAAkkfAAI9DmBLPghcRsjVqbMkBA',
                                                   title='Часть 2',
                                                   performer='Ясна Токарик',
                                                   protect_content=True)
