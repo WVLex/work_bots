@@ -12,16 +12,21 @@ from meditation.db import db as meditation_db
 from astro_bot.bot import dp as astro_dp
 # Meditation-bot
 from meditation.main import dp as meditation_dp
+
 # bagriy_bot
 from bagriy_bot.bot import dp as bagriy_bot_dp
 from bagriy_bot.config import texts as bagriy_bot_texts
 from bagriy_bot.config import config as bagriy_bot_config
 from bagriy_bot.db import db as bagriy_bot_db
+
 # Audio_bot
 from audio_bot.bot import dp as audio_bot_dp
 from audio_bot.config import texts as audio_bot_texts
 from audio_bot.config import config as audio_bot_config
 from audio_bot.keyboards import client_keyboards as audio_bot_client_keyboards
+
+# New_mak_bot
+from new_makbot.bot import dp as new_mak_bot_dp
 
 relax_text = "Расслабиться - https://t.me/+ZE45RiJoC5ExYTM6"
 anxiety_text = "Снять тревогу - https://t.me/+WpYG6uUFryRiN2Q6"
@@ -94,7 +99,7 @@ async def hello_world():
         return 'Hello world meditation GET', 200
 
 
-# # Bagriy_bot
+# Bagriy_bot
 @app.route('/bagriy_bot/<label>', methods=['GET', 'POST'])
 async def bagriy_bot_pay(label=None):
     if request.method == 'POST':
@@ -147,6 +152,17 @@ async def audio_bot():
     Bot.set_current(audio_bot_dp.bot)
     Dispatcher.set_current(audio_bot_dp)
     await audio_bot_dp.process_update(update)
+    return Response('OK', 200)
+
+
+# New_mak_bot
+@app.route('/5121273626:AAHWUv9-bo2zCCWKWS6U5NnW7ZWuwJmKma4', methods=["POST"])
+async def new_mak_bot():
+    update = json.loads(request.stream.read().decode('utf-8'))
+    update = types.Update.to_object(update)
+    Bot.set_current(new_mak_bot_dp.bot)
+    Dispatcher.set_current(new_mak_bot_dp)
+    await new_mak_bot_dp.process_update(update)
     return Response('OK', 200)
 
 
