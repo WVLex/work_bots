@@ -62,7 +62,7 @@ def get_group_of_users():
                 data = cur.fetchall()
                 send_text = [i for i in data if datetime.datetime.now() - i[2] < datetime.timedelta(days=7) or
                              i[1] is True]
-                send_pay = [i for i in data if datetime.datetime.now() - i[2] > datetime.timedelta(days=7) and
+                send_pay = [i for i in data if datetime.datetime.now() - i[2] >= datetime.timedelta(days=7) and
                             i[1] is None]
                 return send_text, send_pay
             except (Exception, Error) as error:

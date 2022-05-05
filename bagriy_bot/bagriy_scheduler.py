@@ -1,7 +1,7 @@
 import datetime
 import apscheduler
 import random
-from create_scheduler import scheduler
+from create_scheduler import scheduler_bagriybot
 from bagriy_bot.create_bot import bot
 from bagriy_bot.db import db
 from bagriy_bot.config import texts as bot_texts
@@ -18,6 +18,7 @@ async def send_message():
             print(e)
     for i in send_pay:
         try:
+            await bot.send_message(i[0], texts[random.randint(1, 28)])
             await bot.send_message(i[0], bot_texts.pay_text,
                                    reply_markup=keyboards.pay_button(str(i[0])))
         except Exception as e:
@@ -26,6 +27,6 @@ async def send_message():
 
 
 async def bagriy_bot():
-    scheduler.add_job(send_message, "cron", hour='6')
+    scheduler_bagriybot.add_job(send_message, "cron", hour='6')
 
 
