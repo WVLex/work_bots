@@ -13,10 +13,10 @@ from astro_bot.bot import dp as astro_dp
 # Meditation-bot
 from meditation.main import dp as meditation_dp
 # bagriy_bot
-# from bagriy_bot.create_bot import dp as bagriy_bot_dp
-# from bagriy_bot.config import texts as bagriy_bot_texts
-# from bagriy_bot.config import config as bagriy_bot_config
-# from bagriy_bot.db import db as bagriy_bot_db
+from bagriy_bot.bot import dp as bagriy_bot_dp
+from bagriy_bot.config import texts as bagriy_bot_texts
+from bagriy_bot.config import config as bagriy_bot_config
+from bagriy_bot.db import db as bagriy_bot_db
 # Audio_bot
 from audio_bot.bot import dp as audio_bot_dp
 from audio_bot.config import texts as audio_bot_texts
@@ -95,17 +95,26 @@ async def hello_world():
 
 
 # # Bagriy_bot
-# @app.route('/bagriy_bot/<label>', methods=['GET', 'POST'])
-# async def bagriy_bot(label=None):
-#     if request.method == 'POST':
-#         bot = bagriy_bot_dp.bot
-#         tg_id = label
-#         bagriy_bot_db.update_value(tg_id, 'pay', True)
-#         await bot.send_message(tg_id, bagriy_bot_texts.success_pay_text)
-#         return 'ok', 200
-#     elif request.method == 'GET':
-#         return redirect(bagriy_bot_config.url + bagriy_bot_config.label.format(label=label))
+@app.route('/bagriy_bot/<label>', methods=['GET', 'POST'])
+async def bagriy_bot_pay(label=None):
+    if request.method == 'POST':
+        bot = bagriy_bot_dp.bot
+        tg_id = label
+        bagriy_bot_db.update_value(tg_id, 'pay', True)
+        await bot.send_message(tg_id, bagriy_bot_texts.success_pay_text)
+        return 'ok', 200
+    elif request.method == 'GET':
+        return redirect(bagriy_bot_config.url.format(label=label))
 
+
+@app.route('/5332858863:AAFa_B0Sm4I63igPecySGt3-0McBhv16Stk', methods=['POST'])
+async def bagriy_bot():
+    update = json.loads(request.stream.read().decode('utf-8'))
+    update = types.Update.to_object(update)
+    Bot.set_current(bagriy_bot_dp.bot)
+    Dispatcher.set_current(bagriy_bot_dp)
+    await bagriy_bot_dp.process_update(update)
+    return Response('Ok', 200)
 
 
 # Astro_bot

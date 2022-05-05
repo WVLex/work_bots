@@ -19,8 +19,7 @@ sum = None
 url = 'https://yoomoney.ru/quickpay/confirm.xml?' \
       'receiver={receiver}&' \
       'quickpay-form=shop&' \
+      'label={label}&' \
       'targets={targets}&' \
       'paymentType=SB&' \
-      'sum={sum}'.format(receiver=None, targets=None, sum=None)
-
-label = 'label={label}'
+      'sum={sum}'.format(receiver=None, targets=None, sum=None, label=None)
