@@ -5,7 +5,6 @@ from audio_bot.config import config
 def pay_button(tg_id):
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton(text='Оплатить', url='https://snebaupal.ru/audio_bot/book' + tg_id))
-    markup.add(types.InlineKeyboardButton(text='Оплатить не из России', callback_data='pass'))
     return markup
 
 

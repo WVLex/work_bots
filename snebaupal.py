@@ -74,13 +74,18 @@ async def hello_world():
                 meditation_db.change_pay_value(tg_id, True)
                 del bot
             else:
-                await audio_bot_dp.bot.send_audio(int(label[4:]),
-                                                  audio='CQACAgIAAxkBAAPKYmvCW80pMHT6c1AQ8nphPau0xBEAAkkfAAI9DmBLPghcRsjVqbMkBA',
-                                                  title='Часть 2',
-                                                  performer='Ясна Токарик',
-                                                  protect_content=True)
-                await audio_bot_dp.bot.send_message(int(label[4:]), audio_bot_texts.second_audio_text,
-                                                    reply_markup=audio_bot_client_keyboards.get_audio())
+                try:
+                    await audio_bot_dp.bot.send_audio(int(label[4:]),
+                                                      audio='CQACAgIAAxkBAAPKYmvCW80pMHT6c1AQ8nphPau0xBEAAkkfAAI9DmBLPghcRsjVqbMkBA',
+                                                      title='Часть 2',
+                                                      performer='Ясна Токарик',
+                                                      protect_content=True)
+                    await audio_bot_dp.bot.send_message(int(label[4:]), audio_bot_texts.second_audio_text,
+                                                        reply_markup=audio_bot_client_keyboards.get_audio())
+                    await audio_bot_dp.bot.send_message(126668370, 'Совершена покупка')
+                    await audio_bot_dp.bot.send_message(244607176, 'Совершена покупка')
+                except Exception as e:
+                    print(e)
         except Exception as error:
             print('Неверная обработка POST. Ошибка {}'.format(error))
 
