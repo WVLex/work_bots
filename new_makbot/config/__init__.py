@@ -1,0 +1,1 @@
+from new_makbot.config import config

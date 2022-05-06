@@ -1,0 +1,1 @@
+from new_makbot.keyboards import client_keyboards
