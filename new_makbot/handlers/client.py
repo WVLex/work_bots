@@ -23,7 +23,7 @@ async def send_card(call: types.CallbackQuery):
     if db.get_user_counter(call.from_user.id) < 3:
         await body(call)
     else:
-        if db.check_user(call.from_user.id)['date'] - datetime.datetime.now() < datetime.timedelta(days=1):
+        if datetime.datetime.now() - db.check_user(call.from_user.id)['date'] < datetime.timedelta(days=1):
             await bot.send_message(call.from_user.id, config.more_than_three_cards)
         else:
             db.zeroing_counter(call.from_user.id)
