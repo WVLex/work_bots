@@ -42,8 +42,9 @@ def append_user(tg_id):
                           port=port) as conn:
         with conn.cursor() as cur:
             try:
-                append_field_query = '''INSERT INTO new_makbot_users (tg_id, counter) VALUES (%s, 0)'''
-                cur.execute(append_field_query, (tg_id,))
+                append_field_query = '''INSERT INTO new_makbot_users (tg_id, counter, date) VALUES (%s, 0, %s)'''
+                date = datetime.datetime.now() - datetime.timedelta(days=2)
+                cur.execute(append_field_query, (tg_id, date))
                 conn.commit()
             except (Exception, Error) as error:
                 print("Ошибка при добавлении значения в таблицу", error)

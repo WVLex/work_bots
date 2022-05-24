@@ -7,7 +7,7 @@ from aiogram import types, Dispatcher
 import new_makbot.keyboards.client_keyboards
 from new_makbot.create_bot import bot, dp
 from new_makbot.db import db
-from new_makbot.config import config
+from new_makbot.config import config, texts
 from new_makbot.keyboards import client_keyboards
 
 
@@ -15,19 +15,11 @@ async def command_start(message: types.Message):
     user = db.check_user(message.from_user.id)
     if not user:
         db.append_user(message.from_user.id)
-    await bot.send_message(message.from_user.id, config.start_text,
-                           reply_markup=client_keyboards.inline_start())
+    await send_card_func(message)
 
 
 async def send_card(call: types.CallbackQuery):
-    if db.get_user_counter(call.from_user.id) < 3:
-        await body(call)
-    else:
-        if datetime.datetime.now() - db.check_user(call.from_user.id)['date'] < datetime.timedelta(days=1):
-            await bot.send_message(call.from_user.id, config.more_than_three_cards)
-        else:
-            db.zeroing_counter(call.from_user.id)
-            await body(call)
+    await send_card_func(call)
 
 
 def register_handlers_client(dp: Dispatcher):
@@ -35,9 +27,24 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_callback_query_handler(send_card, text='card')
 
 
-async def body(call):
-    # await bot.send_photo(call.from_user.id, db.randomizer_for_cards())
-    await bot.send_message(call.from_user.id, config.visit_consultation,
+async def send_message_and_update_data(call, counter):
+    await bot.send_photo(call.from_user.id, db.randomizer_for_cards())
+    await bot.send_message(call.from_user.id, texts.visit_consultation[counter],
                            reply_markup=client_keyboards.inline_start())
     db.update_counter(call.from_user.id)
     db.update_date(call.from_user.id)
+
+
+async def send_card_func(call):
+    counter = db.get_user_counter(call.from_user.id)
+    if counter < 3 and datetime.datetime.now() - db.check_user(call.from_user.id)['date'] > datetime.timedelta(days=1):
+        db.zeroing_counter(call.from_user.id)
+        await send_message_and_update_data(call, 0)
+    elif counter < 3:
+        await send_message_and_update_data(call, counter)
+    else:
+        if datetime.datetime.now() - db.check_user(call.from_user.id)['date'] < datetime.timedelta(days=1):
+            await bot.send_message(call.from_user.id, texts.end)
+        else:
+            db.zeroing_counter(call.from_user.id)
+            await send_message_and_update_data(call, 0)
