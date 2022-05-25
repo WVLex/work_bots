@@ -1,5 +1,6 @@
 # Токен бота
-token = '5332858863:AAFa_B0Sm4I63igPecySGt3-0McBhv16Stk'
+# token = '5332858863:AAFa_B0Sm4I63igPecySGt3-0McBhv16Stk'
+token = '5249223589:AAFl7o5jK2iH4CA1YUoWAzcdgbw5U1x33H8'
 
 # Константы базы данных
 host = 'pg2.sweb.ru'

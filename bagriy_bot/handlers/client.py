@@ -1,3 +1,4 @@
+import random
 from aiogram import Dispatcher, types
 from bagriy_bot.db import db
 from bagriy_bot.create_bot import bot
@@ -8,9 +9,7 @@ async def start(message: types.Message):
     user = db.check_user(message.from_user.id)
     if not user:
         db.append_user(message.from_user.id)
-    await bot.send_message(message.from_user.id, texts.start_text)
-
-
+        await bot.send_message(message.from_user.id, db.get_texts()[random.randint(1, 28)])
 
 
 def register_handlers_client(dp: Dispatcher):
