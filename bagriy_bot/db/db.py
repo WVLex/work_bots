@@ -64,7 +64,8 @@ def get_group_of_users():
                              i[1] is True]
                 send_pay = [i for i in data if datetime.datetime.now() - i[2] >= datetime.timedelta(days=7) and
                             i[1] is None]
-                return send_text, send_pay
+                send_monthly_msg = [i for i in data if datetime.datetime.now() - i[3] >= datetime.timedelta(days=30)]
+                return send_text, send_pay, send_monthly_msg
             except (Exception, Error) as error:
                 print("Ошибка при чтении из таблицы", error)
 

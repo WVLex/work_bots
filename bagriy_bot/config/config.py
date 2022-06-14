@@ -13,14 +13,12 @@ port = 5432
 admins = [126668370, 244607176]
 
 
-receiver = None
-targets = None
-sum = None
+
 
 url = 'https://yoomoney.ru/quickpay/confirm.xml?' \
       'receiver={receiver}&' \
       'quickpay-form=shop&' \
       'label={label}&' \
-      'targets={targets}&' \
+      'targets=Твоя поддержка&' \
       'paymentType=SB&' \
-      'sum={sum}'.format(receiver=None, targets=None, sum=None, label=None)
+      'sum=700'

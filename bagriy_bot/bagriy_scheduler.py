@@ -9,7 +9,7 @@ from bagriy_bot.keyboards import keyboards
 
 
 async def send_message():
-    send_text, send_pay = db.get_group_of_users()
+    send_text, send_pay, send_monthly_msg = db.get_group_of_users()
     texts = db.get_texts()
     for i in send_text:
         try:
@@ -24,6 +24,11 @@ async def send_message():
         except Exception as e:
             print(e)
         db.update_value(i[0], 'pay', False)
+    for i in send_monthly_msg:
+        await bot.send_message(i[0], bot_texts.pay_text,
+                               reply_markup=keyboards.pay_button(str(i[0])))
+        db.update_value(i[0], 'pay', False)
+        db.update_value(i[0], 'pay_date', None)
 
 
 async def bagriy_bot():

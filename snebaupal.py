@@ -1,3 +1,4 @@
+import datetime
 import json
 from flask import Flask, request, Response, redirect
 from aiogram import Bot, Dispatcher, types
@@ -106,6 +107,7 @@ async def bagriy_bot_pay(label=None):
         bot = bagriy_bot_dp.bot
         tg_id = label
         bagriy_bot_db.update_value(tg_id, 'pay', True)
+        bagriy_bot_db.update_value(tg_id, 'pay_date', datetime.datetime.now())
         await bot.send_message(tg_id, bagriy_bot_texts.success_pay_text)
         return 'ok', 200
     elif request.method == 'GET':
