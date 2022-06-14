@@ -3,5 +3,5 @@ from aiogram import types
 
 def pay_button(label):
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton(text='700руб', url='https://sbebaupal.ru/bagriy_bot/{}'.format(label)))
+    markup.add(types.InlineKeyboardButton(text='700руб', url='https://snebaupal.ru/bagriy_bot/{}'.format(label)))
     return markup
