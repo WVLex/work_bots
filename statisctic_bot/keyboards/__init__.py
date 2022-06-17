@@ -1,0 +1,1 @@
+from statisctic_bot.keyboards import client_keyboards

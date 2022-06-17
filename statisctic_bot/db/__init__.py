@@ -1,0 +1,1 @@
+from statisctic_bot.db import db
