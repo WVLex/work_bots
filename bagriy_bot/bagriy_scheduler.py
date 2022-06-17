@@ -32,6 +32,6 @@ async def send_message():
 
 
 async def bagriy_bot():
-    scheduler_bagriybot.add_job(send_message, "cron", hour='6')
+    scheduler_bagriybot.add_job(send_message, "cron", hour='6', timezone='Europe/Moscow')
 
 

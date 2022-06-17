@@ -16,7 +16,7 @@ admins = [126668370, 244607176]
 
 
 url = 'https://yoomoney.ru/quickpay/confirm.xml?' \
-      'receiver={receiver}&' \
+      'receiver=4100116202606736&' \
       'quickpay-form=shop&' \
       'label={label}&' \
       'targets=Твоя поддержка&' \
