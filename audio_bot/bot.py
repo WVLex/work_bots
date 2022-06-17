@@ -8,4 +8,4 @@ from audio_bot.handlers import client
 
 client.register_handlers_client(dp)
 
-executor.start_polling(dp)
+# executor.start_polling(dp)
