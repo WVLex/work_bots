@@ -5,7 +5,6 @@ from create_scheduler import scheduler_new_makbot
 from new_makbot.create_bot import bot
 from new_makbot.db import db
 from new_makbot.config import texts
-from new_makbot.keyboards import client_keyboards
 
 
 async def send_message():
