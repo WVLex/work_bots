@@ -82,6 +82,22 @@ def get_card_id(card_id):
                 print("Ошибка при добавлении значения в таблицу", error)
 
 
+def get_all_users():
+    with psycopg2.connect(host=host,
+                          user=user,
+                          password=password,
+                          database=database,
+                          port=port) as conn:
+        with conn.cursor() as cur:
+            try:
+                get_all_query = 'SELECT * FROM new_makbot_users'
+                cur.execute(get_all_query)
+                data = cur.fetchall()
+                return data
+            except (Exception, Error) as error:
+                print("Ошибка при получении значения tg_id", error)
+
+
 def update_counter(tg_id):
     with psycopg2.connect(host=host,
                           user=user,
@@ -95,6 +111,21 @@ def update_counter(tg_id):
                 conn.commit()
             except (Exception, Error) as error:
                 print("Ошибка при добавлении значения в таблицу", error)
+
+
+def update_value(tg_id, column, value):
+    with psycopg2.connect(host=host,
+                          user=user,
+                          password=password,
+                          database=database,
+                          port=port) as conn:
+        with conn.cursor() as cur:
+            try:
+                query = '''UPDATE new_makbot_users SET {} = %s WHERE tg_id = %s'''.format(column)
+                cur.execute(query, (value, tg_id))
+                conn.commit()
+            except (Exception, Error) as error:
+                print("Ошибка при чтении из таблицы", error)
 
 
 def zeroing_counter(tg_id):

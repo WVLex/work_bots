@@ -28,6 +28,9 @@ from audio_bot.keyboards import client_keyboards as audio_bot_client_keyboards
 
 # New_mak_bot
 from new_makbot.bot import dp as new_mak_bot_dp
+from new_makbot.db import db as new_mak_bot_db
+from new_makbot.config import texts as new_mak_bot_texts
+from new_makbot.config import config as new_mak_bot_config
 
 relax_text = "Расслабиться - https://t.me/+ZE45RiJoC5ExYTM6"
 anxiety_text = "Снять тревогу - https://t.me/+WpYG6uUFryRiN2Q6"
@@ -166,6 +169,21 @@ async def new_mak_bot():
     Dispatcher.set_current(new_mak_bot_dp)
     await new_mak_bot_dp.process_update(update)
     return Response('OK', 200)
+
+
+@app.route('/makbot/purchase/<label>', methods=["GET", "POST"])
+async def new_mak_bot_purchase(label=None):
+    if request.method == 'POST':
+        data = make_dict(request.get_data(as_text=True))
+        label = data['label']
+        bot = new_mak_bot_dp.bot
+        new_mak_bot_db.update_value(label, 'pay', True)
+        bagriy_bot_db.update_value(label, 'date_of_purchase', datetime.datetime.now())
+        await bot.send_message(label, new_mak_bot_texts.today_card)
+        await bot.send_photo(label, new_mak_bot_db.randomizer_for_cards())
+        return 'ok', 200
+    elif request.method == 'GET':
+        return redirect(new_mak_bot_config.url.format(label=label))
 
 
 @app.route('/audio_bot/<label>', methods=['GET'])
