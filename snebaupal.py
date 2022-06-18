@@ -178,7 +178,7 @@ async def new_mak_bot_purchase(label=None):
         label = data['label']
         bot = new_mak_bot_dp.bot
         new_mak_bot_db.update_value(label, 'pay', True)
-        bagriy_bot_db.update_value(label, 'date_of_purchase', datetime.datetime.now())
+        new_mak_bot_db.update_value(label, 'date_of_purchase', datetime.datetime.now())
         await bot.send_message(label, new_mak_bot_texts.today_card)
         await bot.send_photo(label, new_mak_bot_db.randomizer_for_cards())
         return 'ok', 200
