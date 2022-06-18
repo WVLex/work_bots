@@ -32,6 +32,9 @@ from new_makbot.db import db as new_mak_bot_db
 from new_makbot.config import texts as new_mak_bot_texts
 from new_makbot.config import config as new_mak_bot_config
 
+# Statistic_bot
+from statisctic_bot.bot import dp as statistic_bot_dp
+
 relax_text = "Расслабиться - https://t.me/+ZE45RiJoC5ExYTM6"
 anxiety_text = "Снять тревогу - https://t.me/+WpYG6uUFryRiN2Q6"
 full_text = "Наполниться - https://t.me/+TRkD5Mz8ApljMGQy"
@@ -184,6 +187,17 @@ async def new_mak_bot_purchase(label=None):
         return 'ok', 200
     elif request.method == 'GET':
         return redirect(new_mak_bot_config.url.format(label=label))
+
+
+# Statistic_bot
+@app.route('/5402910355:AAHGZ6yE-9EF3qPT1Z1vESU1peVcrOGXrOI', methods=["POST"])
+async def statistic_bot():
+    update = json.loads(request.stream.read().decode('utf-8'))
+    update = types.Update.to_object(update)
+    Bot.set_current(statistic_bot_dp.bot)
+    Dispatcher.set_current(statistic_bot_dp)
+    await statistic_bot_dp.process_update(update)
+    return Response('OK', 200)
 
 
 @app.route('/audio_bot/<label>', methods=['GET'])
