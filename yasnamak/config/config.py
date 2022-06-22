@@ -6,13 +6,13 @@ bot_id = 5186996474
 
 
 # webhooks
-WEBHOOK_HOST = 'https://snebaupal.ru'
+WEBHOOK_HOST = 'https://angelb.ru'
 
 WEBHOOK_PORT = 8443  # 443, 80, 88 or 8443 (port need to be 'open')
 WEBHOOK_LISTEN = '0.0.0.0'  # In some VPS you may need to put here the IP addr
 
-WEBHOOK_SSL_CERT = './ssl/snebaupal.ru.crt'
-WEBHOOK_SSL_PRIV = './ssl/snebaupal.ru.key'
+WEBHOOK_SSL_CERT = './ssl/angelb.ru.crt'
+WEBHOOK_SSL_PRIV = './ssl/angelb.ru.key'
 
 WEBHOOK_URL_BASE = "https://{}:{}".format(WEBHOOK_HOST, WEBHOOK_PORT)
 WEBHOOK_URL_PATH = "/{}/".format(token)

@@ -18,3 +18,9 @@ async def mass_mailing():
         finally:
             await asyncio.sleep(5)
     print('END!')
+
+
+event_loop = asyncio.get_event_loop()
+tasks = [event_loop.create_task(mass_mailing())]
+asyncio.wait(tasks)
+event_loop.run_forever()
