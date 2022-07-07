@@ -12,7 +12,7 @@ async def mass_mailing():
         try:
             await bot.send_message(i[0], texts.massmailing_text,
                                    reply_markup=client_keyboards.inline_pay_button(i[0]))
-            print('Отправил сообщение пользователю с id', i)
+            print('Отправил сообщение пользователю с id', i[0])
         except Exception as error:
             print(error)
         finally:

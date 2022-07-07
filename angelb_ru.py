@@ -25,6 +25,7 @@ from audio_bot.bot import dp as audio_bot_dp
 from audio_bot.config import texts as audio_bot_texts
 from audio_bot.config import config as audio_bot_config
 from audio_bot.keyboards import client_keyboards as audio_bot_client_keyboards
+from audio_bot.db import db as audio_bot_db
 
 # New_mak_bot
 from new_makbot.bot import dp as new_mak_bot_dp
@@ -94,6 +95,8 @@ async def hello_world():
                                                       protect_content=True)
                     await audio_bot_dp.bot.send_message(int(label[4:]), audio_bot_texts.second_audio_text,
                                                         reply_markup=audio_bot_client_keyboards.get_audio())
+                    audio_bot_db.update_value(int(label[4:]), 'purchase', True)
+                    audio_bot_db.update_value(int(label[4:]), 'purchase_date', datetime.datetime.now())
                     await audio_bot_dp.bot.send_message(126668370, 'Совершена покупка')
                     await audio_bot_dp.bot.send_message(244607176, 'Совершена покупка')
                 except Exception as e:

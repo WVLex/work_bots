@@ -15,6 +15,7 @@ async def command_start(message: types.Message):
     user = db.check_user(message.from_user.id)
     if not user:
         db.append_user(message.from_user.id)
+        db.update_value(message.from_user.id, 'start_date', datetime.datetime.now())
     await send_card_func(message)
 
 

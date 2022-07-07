@@ -1,3 +1,5 @@
+import datetime
+
 from aiogram import types, Dispatcher
 
 from audio_bot.create_bot import bot
@@ -14,6 +16,7 @@ async def start(message: types.Message):
                              protect_content=True,
                              title='Часть 1')
         db.update_value(message.from_user.id, 'pay', True)
+        db.update_value(message.from_user.id, 'date_start', datetime.datetime.now())
 
 
 async def pay_message(call: types.CallbackQuery):
