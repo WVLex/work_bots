@@ -33,8 +33,8 @@ def append_user(tg_id):
                           port=port) as conn:
         with conn.cursor() as cur:
             try:
-                append_field_query = '''INSERT INTO astrobot_users (tg_id) VALUES (%s)'''
-                cur.execute(append_field_query, (tg_id,))
+                append_field_query = '''INSERT INTO astrobot_users (tg_id, date_start) VALUES (%s, %s)'''
+                cur.execute(append_field_query, (tg_id, datetime.datetime.now()))
                 conn.commit()
             except (Exception, Error) as error:
                 print("Ошибка при добавлении значения в таблицу", error)
