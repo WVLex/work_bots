@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, MetaData
 from contextlib import contextmanager
 
 
-url = 'postgresql+psycopg2://v4tograpru_lex:AlexCoolBoy22@pg2.sweb.ru:5432/v4tograpru_lex'
+url = 'hidden'
 engine = create_engine(url)
 meta = MetaData(engine)
 Base = declarative_base(engine)
